@@ -1,24 +1,26 @@
-package com.example.dieeins;
+package com.example.dieeins.model;
 
-public class User {
+import com.orm.SugarRecord;
 
-    private String Name;
+public class User extends SugarRecord {
+
+    private String name;
     private int score;
 
     public User() {
     }
 
     public User(String name, int score) {
-        Name = name;
+        this.name = name;
         this.score = score;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public int getScore() {

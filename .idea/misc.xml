@@ -3,10 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Nemanja/StudioProjects/dieEins/app/src/main/res/layout/activity_gewinner.xml" value="0.264" />
+        <entry key="..\:/Users/Nemanja/StudioProjects/dieEins/app/src/main/res/layout/activity_spielererfassen.xml" value="0.536" />
+        <entry key="..\:/Users/Nemanja/StudioProjects/dieEins/app/src/main/res/layout/activity_spielfeld.xml" value="0.136" />
         <entry key="..\:/Users/nem.pet/AndroidStudioProjects/dieEins/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/yancy/StudioProjects/dieEins/app/src/main/res/layout/activity_gewinner.xml" value="0.2427536231884058" />
         <entry key="..\:/Users/yancy/StudioProjects/dieEins/app/src/main/res/layout/activity_main.xml" value="0.1793478260869565" />
-        <entry key="..\:/Users/yancy/StudioProjects/dieEins/app/src/main/res/layout/activity_spielererfassen.xml" value="0.1793478260869565" />
-        <entry key="..\:/Users/yancy/StudioProjects/dieEins/app/src/main/res/layout/activity_spielfeld.xml" value="0.1793478260869565" />
+        <entry key="..\:/Users/yancy/StudioProjects/dieEins/app/src/main/res/layout/activity_spielererfassen.xml" value="0.264" />
+        <entry key="..\:/Users/yancy/StudioProjects/dieEins/app/src/main/res/layout/activity_spielfeld.xml" value="0.264" />
+        <entry key="..\:/Users/yancy/StudioProjects/dieEins/app/src/main/res/layout/activity_spielfeldd.xml" value="0.2427536231884058" />
         <entry key="..\:/Users/yancy/StudioProjects/dieEins/app/src/main/res/layout/activity_spielregeln.xml" value="0.1793478260869565" />
       </map>
     </option>
