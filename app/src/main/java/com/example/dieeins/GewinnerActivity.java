@@ -10,7 +10,7 @@ public class GewinnerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_spielererfassen);
+        setContentView(R.layout.activity_gewinner);
         Button btn = (Button)findViewById(R.id.button4);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
