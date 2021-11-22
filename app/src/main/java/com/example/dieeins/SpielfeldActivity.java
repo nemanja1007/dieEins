@@ -85,6 +85,6 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
-        //ignore
+        //ignore this, not needed
     }
 }
