@@ -11,9 +11,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.dieeins.model.User;
+import com.orm.SugarContext;
+
 import java.util.Arrays;
 import java.util.Random;
 
+/**
+ * Klasse SpielfeldActivity
+ * Hier ist die Activity für die Spiellogik festgelegt
+ */
 public class SpielfeldActivity extends AppCompatActivity implements SensorEventListener{
 
     int[] wuerfel = new int[] {1,2,3,4,5,6};
@@ -40,13 +47,26 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
     int startSpieler = 1;
     float acceleration;
 
-
+    /**
+     * Überschriebene onCreate Methode
+     * Hier wird definiert, was zum Aufruf der Seite gemacht wird
+     *
+     * Spieler und Punktestand sind ersichtlich
+     * Es wird angezeigt, welcher Spieler an der Reihe ist
+     *
+     * @param savedInstanceState
+     */
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spielfeld);
 
+        //Benötigt für DB Zugriff mit Sugar
+        SugarContext.init(this);
+
         mgr = (SensorManager) this.getSystemService(SENSOR_SERVICE);
 
+        //TYPE_ACCELEROMETER Sensor hinzugefügt für das Schütteln
         temp = mgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
         tempTxt = (TextView) findViewById(R.id.textView10);
@@ -70,13 +90,23 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
 
         spielerAnDerReihe = (TextView) findViewById(R.id.textView9);
         spielerAnDerReihe.setText(spieler1 + " ist an der Reihe.");
+
     }
 
+    /**
+     * Methode getRandom, welche zufällige Zahl aus mitgegebenen Array zurückgibt
+     * @param array
+     * @return array[rnd]
+     */
     public static int getRandom(int[] array) {
         int rnd = new Random().nextInt(array.length);
         return array[rnd];
     }
 
+    /**
+     * Überschriebene onResume Methode, welche den Listener SENSOR_ACCELEROMETER
+     * registriert für das Schütteln beim Würfeln
+     */
     @Override
     protected void onResume() {
         mgr.registerListener(this, temp, SensorManager.SENSOR_ACCELEROMETER);
@@ -85,6 +115,10 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
 
     }
 
+    /**
+     * Überschriebene onPause Methode, welche den Listener SENSOR_ACCELEROMETER
+     * wieder entfernt
+     */
     @Override
     protected void onPause() {
         mgr.unregisterListener(this, temp);
@@ -93,22 +127,28 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
 
     }
 
-
+    /**
+     * Überschriebene onSensorChanged Methode, welche Bewegungen erkennt
+     * Hier wird der Spielerwechsel und das Würfeln aufgerufen
+     * @param sensorEvent
+     */
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
+        //Überprüfung, ob eine Beschleunigung von mind. 6.5m/s2 (acceleration) stattgefunden hat
         if(acceleration != sensorEvent.values[0]){
             acceleration = sensorEvent.values[0];
             if(acceleration > 6.5) {
-
                 spielerWechsel();
                 wuerfeln();
             }
         }
         tempTxt.setText("Schüttel durchgeführt "+acceleration);
-        //text.invalidate();
     }
 
-
+    /**
+     * spielerWechsel-Methode
+     * Hier findet der Spielerwechsel statt
+     */
     public void spielerWechsel() {
         if (startSpieler == 1) {
             spielerAnDerReihe.setText(spieler1 + " ist an der Reihe.");
@@ -119,18 +159,30 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
         }
     }
 
+    /**
+     * Implementierte Methode onAccuracyChanged
+     * Wird nicht bei uns benutzt
+     * @param sensor
+     * @param i
+     */
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
-        //ignore this, not needed
+        //nicht gebraucht
     }
 
 
-
+    /**
+     * wuerfeln-Methode
+     * Hier werden die 5 Würfel gewürfelt und das Total zusammengezählt
+     * Je nach Würfel, wird das korrekte Bild angezeigt
+     * Überprüfung, ob eine 1 dabei ist, findet auch hier statt-->falls ja: keine Punkte
+     *
+     */
     public void wuerfeln(){
 
         int total = 0;
 
-        //wünf mal Würfel
+        //fünf mal Würfeln
         for (int i = 0; i < 5 ; i++ ){
             int temp = getRandom(wuerfel);
             gewuerfelt[i] = temp;
@@ -144,7 +196,7 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
         ImageView imageView5 = (ImageView) findViewById(R.id.imageView6);
 
 
-        //würfel 1
+        //Würfel 1
         if (gewuerfelt[0] == 1) {
             imageView1.setImageResource(R.drawable.dice1);
         }else if (gewuerfelt[0] == 2) {
@@ -159,7 +211,7 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
             imageView1.setImageResource(R.drawable.dice6);
         }
 
-        //würfel 2
+        //Würfel 2
         if (gewuerfelt[1] == 1) {
             imageView2.setImageResource(R.drawable.dice1);
         }else if (gewuerfelt[1] == 2) {
@@ -174,7 +226,7 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
             imageView2.setImageResource(R.drawable.dice6);
         }
 
-        //würfel 3
+        //Würfel 3
         if (gewuerfelt[2] == 1) {
             imageView3.setImageResource(R.drawable.dice1);
         }else if (gewuerfelt[2] == 2) {
@@ -189,7 +241,7 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
             imageView3.setImageResource(R.drawable.dice6);
         }
 
-        //würfel 4
+        //Würfel 4
         if (gewuerfelt[3] == 1) {
             imageView4.setImageResource(R.drawable.dice1);
         }else if (gewuerfelt[3] == 2) {
@@ -204,7 +256,7 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
             imageView4.setImageResource(R.drawable.dice6);
         }
 
-        //würfel 5
+        //Würfel 5
         if (gewuerfelt[4] == 1) {
             imageView5.setImageResource(R.drawable.dice1);
         }else if (gewuerfelt[4] == 2) {
@@ -221,6 +273,7 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
 
         boolean enthaeltEins = false;
 
+        //Überprüfung, ob eine 1 enthalten ist im Gewürfeltem
         for (int i = 0; i < 5 ; i++ ){
             if (gewuerfelt[i] == 1){
                 enthaeltEins = true;
@@ -230,6 +283,7 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
         if (enthaeltEins != true){
             punkteSpieler1 = punkteSpieler1 + total;
         }
+
         gewuerfelteZahlen.setText("Gewürfelte Zahlen: " + gewuerfelt[1] +
                 " " + gewuerfelt[2] +
                 " " + gewuerfelt[3] +
