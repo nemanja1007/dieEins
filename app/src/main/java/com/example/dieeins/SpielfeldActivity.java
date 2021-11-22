@@ -1,17 +1,15 @@
 package com.example.dieeins;
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.Intent;
+
+import android.annotation.SuppressLint;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class SpielfeldActivity extends AppCompatActivity implements SensorEventListener{
@@ -19,8 +17,8 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
     int[] wuerfel = new int[] {1,2,3,4,5,6};
     int[] gewuerfelt = new int[5];
 
-    int punkteSpieler1 = 0;
-    int punkteSpieler2 = 0;
+    int punkteSpieler1;
+    int punkteSpieler2;
 
     private String SpielerDran;
 
@@ -29,10 +27,11 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
     private TextView tempTxt;
     private TextView gewuerfelteZahlen;
     private TextView spielerAnDerReihe;
-    private TextView spieler1Name;
+    private TextView punkteTitelTV;
     private TextView spieler2Name;
-    private TextView punkte1;
-    private TextView punkte2;
+    private TextView punkte1TV;
+    private TextView punkte2TV;
+    private TextView entaelt1;
 
     private String spieler1;
     private String spieler2;
@@ -51,22 +50,20 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
 
         tempTxt = (TextView) findViewById(R.id.textView10);
         gewuerfelteZahlen = (TextView) findViewById(R.id.textView11);
-
+        entaelt1 = (TextView) findViewById(R.id.textView34);
 
 
         Bundle bundle = getIntent().getExtras();
         spieler1 = bundle.getString("spieler1");
         spieler2 = bundle.getString("spieler2");
-        spieler1Name = (TextView) findViewById(R.id.textView15);
-        spieler2Name = (TextView) findViewById(R.id.textView16);
-        spieler1Name.setText(spieler1);
-        spieler2Name.setText(spieler2);
+        punkteTitelTV = (TextView) findViewById(R.id.textView89);
 
-        punkte1 = (TextView) findViewById(R.id.textView13);
-        punkte2 = (TextView) findViewById(R.id.textView14);
 
-        punkte1.setText("punkte: "+punkteSpieler1);
-        punkte2.setText("punkte: "+punkteSpieler2);
+        punkte1TV = (TextView) findViewById(R.id.textView90);
+        punkte2TV = (TextView) findViewById(R.id.textView91);
+        // punktestände werden auf 0 gesetzt
+        punkte1TV.setText(spieler1 + ": " + punkteSpieler1);
+        punkte2TV.setText(spieler2 + ": " + punkteSpieler2);
 
         spielerAnDerReihe = (TextView) findViewById(R.id.textView9);
         spielerAnDerReihe.setText(spieler1 + " ist an der Reihe.");
@@ -126,6 +123,7 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
 
 
 
+    @SuppressLint("SetTextI18n")
     public void wuerfeln(){
 
         int total = 0;
@@ -227,9 +225,25 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
             }
         }
 
+
         if (enthaeltEins != true){
-            punkteSpieler1 = punkteSpieler1 + total;
+
+            entaelt1.setText("Du hast keine 1 gewürfelt");
+
+            if (spielerAnDerReihe.equals(spieler1)) {
+
+                punkteSpieler1 = punkteSpieler1 + total;
+                punkte1TV.setText(spieler1 + ": " + punkteSpieler1);
+
+            } else if (spielerAnDerReihe.equals(spieler2)){
+
+                punkteSpieler2 = punkteSpieler2 + total;
+                punkte2TV.setText(spieler2 + ": " + punkteSpieler2);
+            }
+        } else {
+            entaelt1.setText("Du hast eine 1 gewürfelt");
         }
+
         gewuerfelteZahlen.setText("Gewürfelte Zahlen: " + gewuerfelt[1] +
                 " " + gewuerfelt[2] +
                 " " + gewuerfelt[3] +
