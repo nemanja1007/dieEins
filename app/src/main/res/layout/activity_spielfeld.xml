@@ -145,7 +145,7 @@
             android:id="@+id/imageView"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            app:srcCompat="@drawable/dice1" />
+            app:srcCompat="@drawable/fragezeichen" />
 
         <Space
             android:layout_width="wrap_content"
@@ -156,7 +156,7 @@
             android:id="@+id/imageView3"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            app:srcCompat="@drawable/dice2" />
+            app:srcCompat="@drawable/fragezeichen" />
 
         <Space
             android:layout_width="wrap_content"
@@ -167,7 +167,7 @@
             android:id="@+id/imageView4"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            app:srcCompat="@drawable/dice3" />
+            app:srcCompat="@drawable/fragezeichen" />
 
         <Space
             android:layout_width="wrap_content"
@@ -194,7 +194,7 @@
             android:id="@+id/imageView5"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            app:srcCompat="@drawable/dice4" />
+            app:srcCompat="@drawable/fragezeichen" />
 
         <Space
             android:layout_width="wrap_content"
@@ -205,7 +205,7 @@
             android:id="@+id/imageView6"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            app:srcCompat="@drawable/dice5" />
+            app:srcCompat="@drawable/fragezeichen" />
 
         <Space
             android:layout_width="wrap_content"

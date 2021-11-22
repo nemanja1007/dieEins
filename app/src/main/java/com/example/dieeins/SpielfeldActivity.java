@@ -23,6 +23,12 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
     private SensorManager mgr;
     private Sensor temp;
     private TextView tempTxt;
+    int startSpieler = 1;
+    String spieler1 ="";
+    String spieler2 = "";
+    float acceleration;
+
+    private TextView spielerAnDerReihe;
 
 
 
@@ -39,8 +45,8 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
 
 
         Bundle bundle = getIntent().getExtras();
-        String spieler1 = bundle.getString("spieler1");
-        String spieler2 = bundle.getString("spieler2");
+        spieler1 = bundle.getString("spieler1");
+        spieler2 = bundle.getString("spieler2");
         TextView spieler1Name = (TextView) findViewById(R.id.textView15);
         TextView spieler2Name = (TextView) findViewById(R.id.textView16);
         spieler1Name.setText(spieler1);
@@ -52,7 +58,7 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
         punkte1.setText("Punkte: "+punkteSpieler1);
         punkte2.setText("Punkte: "+punkteSpieler2);
 
-        TextView spielerAnDerReihe = (TextView) findViewById(R.id.textView9);
+        spielerAnDerReihe = (TextView) findViewById(R.id.textView9);
         spielerAnDerReihe.setText(spieler1 + " ist an der Reihe.");
     }
 
@@ -76,15 +82,27 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        float acceleration = sensorEvent.values[0];
-
+        if(acceleration != sensorEvent.values[0]){
+            acceleration = sensorEvent.values[0];
+            spielerWechsel();
+        }
         tempTxt.setText("Schüttel durchgeführt"+acceleration);
         //text.invalidate();
     }
 
+    public void spielerWechsel() {
+        if (startSpieler == 1) {
+            spielerAnDerReihe.setText(spieler1 + " ist an der Reihe.");
+            startSpieler = 0;
+        } else {
+            spielerAnDerReihe.setText(spieler2 + " ist an der Reihe.");
+            startSpieler = 1;
+        }
+    }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
         //ignore this, not needed
     }
+
 }
