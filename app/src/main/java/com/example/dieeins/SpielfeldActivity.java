@@ -1,6 +1,7 @@
 package com.example.dieeins;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
@@ -12,18 +13,28 @@ import android.widget.TextView;
 import java.util.Arrays;
 import java.util.Random;
 
-public class SpielfeldActivity extends AppCompatActivity {
+public class SpielfeldActivity extends AppCompatActivity implements SensorEventListener{
 
     int[] wuerfel = new int[] {1,2,3,4,5,6};
     int[] gewuerfelt = new int[5];
 
     int punkteSpieler1 = 0;
     int punkteSpieler2 = 0;
+    private SensorManager mgr;
+    private Sensor temp;
+    private TextView tempTxt;
+
+
 
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spielfeld);
+
+        mgr = (SensorManager) this.getSystemService(SENSOR_SERVICE);
+
+        temp = mgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
+        tempTxt = (TextView) findViewById(R.id.textView10);
 
 
 
@@ -48,5 +59,32 @@ public class SpielfeldActivity extends AppCompatActivity {
     public static int getRandom(int[] array) {
         int rnd = new Random().nextInt(array.length);
         return array[rnd];
+    }
+
+    @Override
+    protected void onResume() {
+        mgr.registerListener(this, temp, SensorManager.SENSOR_ACCELEROMETER);
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        mgr.unregisterListener(this, temp);
+        super.onPause();
+    }
+
+
+    @Override
+    public void onSensorChanged(SensorEvent sensorEvent) {
+        float acceleration = sensorEvent.values[0];
+
+        tempTxt.setText("Schüttel durchgeführt"+acceleration);
+        //text.invalidate();
+    }
+
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int i) {
+        //ignore
     }
 }
