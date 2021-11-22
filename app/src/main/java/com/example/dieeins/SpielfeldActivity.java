@@ -8,6 +8,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Arrays;
@@ -20,16 +21,24 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
 
     int punkteSpieler1 = 0;
     int punkteSpieler2 = 0;
+
+    private String SpielerDran;
+
     private SensorManager mgr;
     private Sensor temp;
     private TextView tempTxt;
-    int startSpieler = 1;
-    String spieler1 ="";
-    String spieler2 = "";
-    float acceleration;
-
+    private TextView gewuerfelteZahlen;
     private TextView spielerAnDerReihe;
+    private TextView spieler1Name;
+    private TextView spieler2Name;
+    private TextView punkte1;
+    private TextView punkte2;
 
+    private String spieler1;
+    private String spieler2;
+
+    int startSpieler = 1;
+    float acceleration;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,22 +50,23 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
         temp = mgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
         tempTxt = (TextView) findViewById(R.id.textView10);
+        gewuerfelteZahlen = (TextView) findViewById(R.id.textView11);
 
 
 
         Bundle bundle = getIntent().getExtras();
         spieler1 = bundle.getString("spieler1");
         spieler2 = bundle.getString("spieler2");
-        TextView spieler1Name = (TextView) findViewById(R.id.textView15);
-        TextView spieler2Name = (TextView) findViewById(R.id.textView16);
+        spieler1Name = (TextView) findViewById(R.id.textView15);
+        spieler2Name = (TextView) findViewById(R.id.textView16);
         spieler1Name.setText(spieler1);
         spieler2Name.setText(spieler2);
 
-        TextView punkte1 = (TextView) findViewById(R.id.textView13);
-        TextView punkte2 = (TextView) findViewById(R.id.textView14);
+        punkte1 = (TextView) findViewById(R.id.textView13);
+        punkte2 = (TextView) findViewById(R.id.textView14);
 
-        punkte1.setText("Punkte: "+punkteSpieler1);
-        punkte2.setText("Punkte: "+punkteSpieler2);
+        punkte1.setText("punkte: "+punkteSpieler1);
+        punkte2.setText("punkte: "+punkteSpieler2);
 
         spielerAnDerReihe = (TextView) findViewById(R.id.textView9);
         spielerAnDerReihe.setText(spieler1 + " ist an der Reihe.");
@@ -71,12 +81,16 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
     protected void onResume() {
         mgr.registerListener(this, temp, SensorManager.SENSOR_ACCELEROMETER);
         super.onResume();
+
+
     }
 
     @Override
     protected void onPause() {
         mgr.unregisterListener(this, temp);
         super.onPause();
+
+
     }
 
 
@@ -84,11 +98,16 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
     public void onSensorChanged(SensorEvent sensorEvent) {
         if(acceleration != sensorEvent.values[0]){
             acceleration = sensorEvent.values[0];
-            spielerWechsel();
+            if(acceleration > 6.5) {
+
+                spielerWechsel();
+                wuerfeln();
+            }
         }
-        tempTxt.setText("Schüttel durchgeführt"+acceleration);
+        tempTxt.setText("Schüttel durchgeführt "+acceleration);
         //text.invalidate();
     }
+
 
     public void spielerWechsel() {
         if (startSpieler == 1) {
@@ -105,4 +124,117 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
         //ignore this, not needed
     }
 
+
+
+    public void wuerfeln(){
+
+        int total = 0;
+
+        //wünf mal Würfel
+        for (int i = 0; i < 5 ; i++ ){
+            int temp = getRandom(wuerfel);
+            gewuerfelt[i] = temp;
+            total = total + temp;
+        }
+
+        ImageView imageView1 = (ImageView) findViewById(R.id.imageView);
+        ImageView imageView2 = (ImageView) findViewById(R.id.imageView3);
+        ImageView imageView3 = (ImageView) findViewById(R.id.imageView4);
+        ImageView imageView4 = (ImageView) findViewById(R.id.imageView5);
+        ImageView imageView5 = (ImageView) findViewById(R.id.imageView6);
+
+
+        //würfel 1
+        if (gewuerfelt[0] == 1) {
+            imageView1.setImageResource(R.drawable.dice1);
+        }else if (gewuerfelt[0] == 2) {
+            imageView1.setImageResource(R.drawable.dice2);
+        }else if (gewuerfelt[0] == 3) {
+            imageView1.setImageResource(R.drawable.dice3);
+        }else if (gewuerfelt[0] == 4) {
+            imageView1.setImageResource(R.drawable.dice4);
+        }else if (gewuerfelt[0] == 5) {
+            imageView1.setImageResource(R.drawable.dice5);
+        }else if (gewuerfelt[0] == 6) {
+            imageView1.setImageResource(R.drawable.dice6);
+        }
+
+        //würfel 2
+        if (gewuerfelt[1] == 1) {
+            imageView2.setImageResource(R.drawable.dice1);
+        }else if (gewuerfelt[1] == 2) {
+            imageView2.setImageResource(R.drawable.dice2);
+        }else if (gewuerfelt[1] == 3) {
+            imageView2.setImageResource(R.drawable.dice3);
+        }else if (gewuerfelt[1] == 4) {
+            imageView2.setImageResource(R.drawable.dice4);
+        }else if (gewuerfelt[1] == 5) {
+            imageView2.setImageResource(R.drawable.dice5);
+        }else if (gewuerfelt[1] == 6) {
+            imageView2.setImageResource(R.drawable.dice6);
+        }
+
+        //würfel 3
+        if (gewuerfelt[2] == 1) {
+            imageView3.setImageResource(R.drawable.dice1);
+        }else if (gewuerfelt[2] == 2) {
+            imageView3.setImageResource(R.drawable.dice2);
+        }else if (gewuerfelt[2] == 3) {
+            imageView3.setImageResource(R.drawable.dice3);
+        }else if (gewuerfelt[2] == 4) {
+            imageView3.setImageResource(R.drawable.dice4);
+        }else if (gewuerfelt[2] == 5) {
+            imageView3.setImageResource(R.drawable.dice5);
+        }else if (gewuerfelt[2] == 6) {
+            imageView3.setImageResource(R.drawable.dice6);
+        }
+
+        //würfel 4
+        if (gewuerfelt[3] == 1) {
+            imageView4.setImageResource(R.drawable.dice1);
+        }else if (gewuerfelt[3] == 2) {
+            imageView4.setImageResource(R.drawable.dice2);
+        }else if (gewuerfelt[3] == 3) {
+            imageView4.setImageResource(R.drawable.dice3);
+        }else if (gewuerfelt[3] == 4) {
+            imageView4.setImageResource(R.drawable.dice4);
+        }else if (gewuerfelt[3] == 5) {
+            imageView4.setImageResource(R.drawable.dice5);
+        }else if (gewuerfelt[3] == 6) {
+            imageView4.setImageResource(R.drawable.dice6);
+        }
+
+        //würfel 5
+        if (gewuerfelt[4] == 1) {
+            imageView5.setImageResource(R.drawable.dice1);
+        }else if (gewuerfelt[4] == 2) {
+            imageView5.setImageResource(R.drawable.dice2);
+        }else if (gewuerfelt[4] == 3) {
+            imageView5.setImageResource(R.drawable.dice3);
+        }else if (gewuerfelt[4] == 4) {
+            imageView5.setImageResource(R.drawable.dice4);
+        }else if (gewuerfelt[4] == 5) {
+            imageView5.setImageResource(R.drawable.dice5);
+        }else if (gewuerfelt[4] == 6) {
+            imageView5.setImageResource(R.drawable.dice6);
+        }
+
+        boolean enthaeltEins = false;
+
+        for (int i = 0; i < 5 ; i++ ){
+            if (gewuerfelt[i] == 1){
+                enthaeltEins = true;
+            }
+        }
+
+        if (enthaeltEins != true){
+            punkteSpieler1 = punkteSpieler1 + total;
+        }
+        gewuerfelteZahlen.setText("Gewürfelte Zahlen: " + gewuerfelt[1] +
+                " " + gewuerfelt[2] +
+                " " + gewuerfelt[3] +
+                " " + gewuerfelt[4] +
+                " " + gewuerfelt[0]);
+
+    }
 }
