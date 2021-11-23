@@ -8,6 +8,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,7 +30,8 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
     int punkteSpieler1;
     int punkteSpieler2;
 
-    private String SpielerDran;
+    Handler handler;
+    int interval= 1000;
 
     private SensorManager mgr;
     private Sensor temp;
@@ -79,6 +81,9 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
         entaelt1 = (TextView) findViewById(R.id.textView34);
 
 
+        handler = new Handler();
+
+
         Bundle bundle = getIntent().getExtras();
         spieler1 = bundle.getString("spieler1");
         spieler2 = bundle.getString("spieler2");
@@ -94,6 +99,7 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
         spielerAnDerReihe = (TextView) findViewById(R.id.textView9);
         spielerAnDerReihe.setText(spieler1 + " ist an der Reihe.");
     }
+
 
     /**
      * Methode getRandom, welche zufällige Zahl aus mitgegebenen Array zurückgibt
@@ -340,6 +346,7 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
                 " " + gewuerfelt[3] +
                 " " + gewuerfelt[4] +
                 " " + gewuerfelt[0]);
+
 
     }
 }
