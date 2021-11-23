@@ -2,6 +2,7 @@ package com.example.dieeins;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -38,13 +39,24 @@ public class SpielerErfassenActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String temp1 = spieler1.getText().toString();
                 String temp2 = spieler2.getText().toString();
-                Intent intent = new Intent(new Intent(SpielerErfassenActivity.this, SpielfeldActivity.class));
-                //Für Übergabe im nächsten Fenster
-                Bundle bundle = new Bundle();
-                bundle.putString("spieler1", temp1);
-                bundle.putString("spieler2", temp2);
-                intent.putExtras(bundle);
-                startActivity(intent);
+                if( TextUtils.isEmpty(spieler1.getText())){
+                    spieler1.setError( "Bitte geben Sie einen Benutzernamen ein." );
+                }else if(temp1.charAt(0) == ' '){
+                    spieler1.setError("Ungültiger Name.");
+                }else if(TextUtils.isEmpty(spieler2.getText())){
+                    spieler2.setError( "Bitte geben Sie einen Benutzernamen ein." );
+                }else if(temp2.charAt(0) == ' '){
+                    spieler2.setError("Ungültiger Name.");
+                }else{
+                    Intent intent = new Intent(new Intent(SpielerErfassenActivity.this, SpielfeldActivity.class));
+                    //Für Übergabe im nächsten Fenster
+                    Bundle bundle = new Bundle();
+                    bundle.putString("spieler1", temp1);
+                    bundle.putString("spieler2", temp2);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+
 
 
             }

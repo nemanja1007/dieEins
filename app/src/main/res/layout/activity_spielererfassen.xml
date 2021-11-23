@@ -41,7 +41,8 @@
             android:id="@+id/plain_text_input"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:inputType="text" />
+            android:maxLength="8"
+            android:inputType="text"/>
 
     </LinearLayout>
 
@@ -67,7 +68,8 @@
             android:id="@+id/plain_text_input2"
             android:layout_width="146dp"
             android:layout_height="wrap_content"
-            android:inputType="text" />
+            android:maxLength="8"
+            android:inputType="text"/>
 
     </LinearLayout>
 

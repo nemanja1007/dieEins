@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Nemanja/StudioProjects/dieEins/app/src/main/res/layout/activity_gewinner.xml" value="0.12" />
+        <entry key="..\:/Users/Nemanja/StudioProjects/dieEins/app/src/main/res/layout/activity_spielererfassen.xml" value="0.264" />
         <entry key="..\:/Users/Nemanja/StudioProjects/dieEins/app/src/main/res/layout/activity_spielfeld.xml" value="0.1265625" />
         <entry key="..\:/Users/nem.pet/AndroidStudioProjects/dieEins/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/nem.pet/AndroidStudioProjects/dieEins/app/src/main/res/layout/activity_spielfeld.xml" value="0.20520833333333333" />
