@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         SugarContext.init(this);
 
         //3 Benutzer hinzufügen
-        User user1 = new User("Maximilian", 30);
+        User user1 = new User("Marvin", 17);
         user1.save();
 
         int bestScore = 1000;

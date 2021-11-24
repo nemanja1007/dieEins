@@ -10,9 +10,10 @@
         android:id="@+id/spielregelnText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="Spielregeln"
-        android:textStyle="bold"
         android:textSize="40dp"
+        android:textStyle="bold"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
@@ -23,22 +24,26 @@
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="241dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="76dp"
-        android:text="Jeder Spieler darf fünfmal würfeln. Die Summe der Augen wird zum Punktestand addiert. Wirft man jedoch eine Eins, werden die Augen der jeweiligen Runde ungültig. Sieger ist, wer als erster 100 Punkte erreicht."
-        app:layout_constraintBottom_toTopOf="@+id/button3"
+        android:layout_width="293dp"
+        android:layout_height="221dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:text="Jeder Spieler darf mit 5 Würfel würfeln. Die Summe der Augen wird zum Punktestand addiert. Würfelt man jedoch eine Eins, werden die Augen der jeweiligen Runde ungültig. Sieger ist, wer als erster 100 Punkte erreicht."
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="97dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="216dp"
+        android:layout_width="172dp"
+        android:layout_height="71dp"
+        android:layout_marginBottom="108dp"
         android:text="Zurück"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -47,6 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="180dp"
         android:fontFamily="sans-serif-thin"
+        android:gravity="center"
         android:text="Die Böse 1"
         android:textSize="32dp"
         android:textStyle="bold"

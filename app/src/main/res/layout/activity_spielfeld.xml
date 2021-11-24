@@ -13,6 +13,7 @@
         android:text="____ ist an der Reihe."
         android:textSize="40dp"
         android:textStyle="bold"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,18 +23,9 @@
         android:id="@+id/textView10"
         android:layout_width="225dp"
         android:layout_height="27dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
         android:text="Schüttle das Handy, um zu würfeln."
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
-
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="225dp"
-        android:layout_height="27dp"
-        android:layout_marginTop="68dp"
-        android:text="Gewürfelte Zahlen: "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -42,8 +34,8 @@
         android:id="@+id/textView34"
         android:layout_width="225dp"
         android:layout_height="27dp"
-        android:layout_marginTop="92dp"
-        android:text="Enthält 1"
+        android:layout_marginTop="356dp"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -143,9 +135,10 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/divider"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.705"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView10"
-        app:layout_constraintVertical_bias="0.241">
+        app:layout_constraintVertical_bias="0.208">
 
         <Space
             android:layout_width="wrap_content"
@@ -194,7 +187,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
-        app:layout_constraintVertical_bias="0.366">
+        app:layout_constraintVertical_bias="0.211">
 
         <Space
             android:layout_width="wrap_content"

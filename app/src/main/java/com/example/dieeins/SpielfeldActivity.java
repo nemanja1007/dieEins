@@ -71,13 +71,12 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
         //Benötigt für DB Zugriff mit Sugar
         SugarContext.init(this);
 
-        mgr = (SensorManager) this.getSystemService(SENSOR_SERVICE);
-
         //TYPE_ACCELEROMETER Sensor hinzugefügt für das Schütteln
+        mgr = (SensorManager) this.getSystemService(SENSOR_SERVICE);
         temp = mgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
         tempTxt = (TextView) findViewById(R.id.textView10);
-        gewuerfelteZahlen = (TextView) findViewById(R.id.textView11);
+        //gewuerfelteZahlen = (TextView) findViewById(R.id.textView11);
         entaelt1 = (TextView) findViewById(R.id.textView34);
 
 
@@ -141,17 +140,19 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
      * Hier wird der Spielerwechsel und das Würfeln aufgerufen
      * @param sensorEvent
      */
+
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         //Überprüfung, ob eine Beschleunigung von mind. 6.9m/s2 (acceleration) stattgefunden hat
-        if(acceleration != sensorEvent.values[0]){
+
+        if(acceleration != sensorEvent.values[0]) {
             acceleration = sensorEvent.values[0];
-            if(acceleration > 6.9) {
+
+            if (acceleration > 7) {
                 spielerWechsel();
                 wuerfeln();
             }
         }
-        tempTxt.setText("Schüttel durchgeführt "+acceleration);
     }
 
     /**
@@ -300,24 +301,32 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
 
         if (enthaeltEins != true){
 
-            entaelt1.setText("punkte addiert");
+
             Log.d("---------------------", String.valueOf(total));
 
             //Addiert Punkte für Spieler1
             if (startSpieler == 1) {
                 punkteSpieler1 = punkteSpieler1 + total;
                 punkte1TV.setText(spieler1 + ": " + punkteSpieler1);
+                entaelt1.setText(spieler1 + " hat " + total + " Punkte erhalten.");
                 total = 0;
 
             } //Addiert Punkte für Spieler2
             else if (startSpieler == 0){
                 punkteSpieler2 = punkteSpieler2 + total;
                 punkte2TV.setText(spieler2 + ": " + punkteSpieler2);
+                entaelt1.setText(spieler2 + " hat " + total + " Punkte erhalten.");
                 total = 0;
             }
         }//Keine Punkte wenn 1 gewürfelt wurde
         else {
-            entaelt1.setText("1 gewürfelt");
+
+            if (startSpieler == 1) {
+                entaelt1.setText( spieler1 + " hat eine 1 gewürfelt  :(");
+            }
+            else if (startSpieler == 0) {
+                entaelt1.setText( spieler2 + " hat eine 1 gewürfelt  :(");
+            }
         }
 
         //Überprüfung, ob Spiel schon ferting
@@ -340,13 +349,12 @@ public class SpielfeldActivity extends AppCompatActivity implements SensorEventL
             intent.putExtras(bundle);
             startActivity(intent);
         }
-
+    /*
         gewuerfelteZahlen.setText("Gewürfelte Zahlen: " + gewuerfelt[1] +
                 " " + gewuerfelt[2] +
                 " " + gewuerfelt[3] +
                 " " + gewuerfelt[4] +
                 " " + gewuerfelt[0]);
-
-
+    */
     }
 }
